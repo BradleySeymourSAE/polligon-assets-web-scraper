@@ -1,41 +1,29 @@
-
 const express = require('express');
-const { startBrowser } = require('./initialize-browser');
+const {startBrowser} = require('./initialize-browser');
 const pageScraper = require('./scraper');
-require('dotenv').config();
-
+let configFile = require('./src/config');
+configFile= configFile.config;
 
 // const categories = ["textures", "models", "hdrs", "brushes"];
 
 
-async function Main(){
+async function Main() {
 
     const app = express();
 
     let port = 5000;
-
     app.listen(port, () => {
         console.log(`App is listening on port ${port}`);
     });
-
-    if (!process.env["USER_EMAIL"] || !process.env["USER_PASSWORD"])
-    {
+    if (!configFile['email'] || !configFile['password']) {
         console.error("Please set an environment file with your USER_EMAIL and USER_PASSWORD params");
-        return;
-    }
-    else if (!process.env["API"])
-    {
+    } else if (!configFile['api']) {
         console.error("Please set the API in the config file to https://www.poliigon.com/");
         return;
     }
-
-
     const browserInstance = await startBrowser();
-
-    await pageScraper.scraper(browserInstance, "textures");
-  
+    await pageScraper.scraper(browserInstance, "texture");
 }
-
 
 Main();
 
