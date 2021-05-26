@@ -1,6 +1,6 @@
 const config={
-    'email': 'hidetempmail@gmail.com',
-    'password':'HideTempMail.poliigon.md5',
+    'email': '',
+    'password':'',
     'api':'https://www.poliigon.com/'
 }
 module.exports={config}
